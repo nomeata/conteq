@@ -156,7 +156,7 @@ and the derived files           conteq.ins,
 % = \int e^{-x^2} dx & this is due to Gauss.
 % \end{conteq}
 %
-% The expressions are typeset in math mode, while the explanation is assumed to be regular text. The curly braces around the explanations come from the default |\ConteqExplanationLayout|.
+% The expressions are typeset in math mode, while the explanation is assumed to be regular text. The curly braces around the explanations come from the default |\ConteqExplStyle|.
 
 % There are other layouts available, which you select with an optional parameter to |\begin{conteq}|, e.g.
 % \begin{verbatim}
@@ -498,9 +498,12 @@ and the derived files           conteq.ins,
   %\tl_show:N \l_conteq_result_tl
   \tl_use:N \l_conteq_result_tl
 }
-\endinput
 %    \end{macrocode}
 %\end{environment}
+%
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
 
 %
 % \iffalse
