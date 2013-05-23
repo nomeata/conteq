@@ -1,6 +1,6 @@
 install:
   - sudo apt-get update
-  - sudo apt-get install texlive-latex-recommended texlive-latex-extra
+  - sudo apt-get install texlive-latex3 texlive-latex-recommended texlive-latex-extra
 
 script:
   - pdflatex conteq.dtx
