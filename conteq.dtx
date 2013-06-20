@@ -373,13 +373,15 @@ and the derived files           conteq.ins,
 % \begin{macro}{\ConteqDefineLayout}
 % The code to define new layouts.
 %    \begin{macrocode}
+\tl_const:Nn \c__conteq_prefix_tl { __conteq_layouts }
+
 \cs_new_protected:Nn \__conteq_define_layout:nnnnnnn {
-  \cs_new_protected:cn {__conteq_#1_begin:} { #2 }
-  \cs_new_protected:cn {__conteq_#1_lhs:n} { #3 }
-  \cs_new_protected:cn {__conteq_#1_rhs_only:n} { #4 }
-  \cs_new_protected:cn {__conteq_#1_rhs_expl:nn} { #5 }
-  \cs_new_protected:cn {__conteq_#1_nl:} { #6 }
-  \cs_new_protected:cn {__conteq_#1_end:} { #7 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1 _begin:} { #2 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_lhs:n} { #3 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_rhs_only:n} { #4 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_rhs_expl:nn} { #5 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_nl:} { #6 }
+  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_end:} { #7 }
 }
 \cs_new_eq:NN \ConteqDefineLayout \__conteq_define_layout:nnnnnnn
 %    \end{macrocode}
@@ -454,9 +456,9 @@ and the derived files           conteq.ins,
 %    \end{macrocode}
 % and set the various functions accordingly, if the layout exists.
 %    \begin{macrocode}
-  \cs_if_exist:cTF {__conteq_ \l__conteq_layout_tl _ begin:}{
+  \cs_if_exist:cTF {\c__conteq_prefix_tl _ \l__conteq_layout_tl _ begin:}{
     \clist_map_inline:nn{begin:, lhs:n,rhs_only:n, rhs_expl:nn, nl:, end:}{
-      \cs_set_eq:cc {__conteq_##1}{__conteq_\l__conteq_layout_tl _##1}
+      \cs_set_eq:cc {__conteq_##1}{\c__conteq_prefix_tl _ \l__conteq_layout_tl _ ##1}
     }
   }{
     \msg_critical:nnx{conteq}{undefined layout}{\l__conteq_layout_tl}
