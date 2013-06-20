@@ -476,9 +476,9 @@ and the derived files           conteq.ins,
   \int_case:nnn {\seq_count:N \l_conteq_lines_seq}
   {
     {1} {
-      \tl_put_right:NV \l_conteq_result_tl \conteq_begin:
+      \tl_put_right:Nx \l_conteq_result_tl {\exp_not:o \conteq_begin:}
       \tl_put_right:NV \l_conteq_result_tl \l_conteq_body_tl
-      \tl_put_right:NV \l_conteq_result_tl \conteq_end:
+      \tl_put_right:Nx \l_conteq_result_tl {\exp_not:o \conteq_end:}
     }
   }{
 %    \end{macrocode}
@@ -488,7 +488,7 @@ and the derived files           conteq.ins,
     \seq_pop_left:NN \l_conteq_lines_seq \l_conteq_head_tl
     \seq_pop_right:NN \l_conteq_lines_seq \l_conteq_lastline_tl
 
-    \tl_put_right:NV \l_conteq_result_tl \conteq_begin:
+    \tl_put_right:Nx \l_conteq_result_tl {\exp_not:o \conteq_begin:}
     \tl_put_right:Nx \l_conteq_result_tl {
       \conteq_args_once:NV \conteq_lhs:n \l_conteq_head_tl
     }
@@ -496,7 +496,7 @@ and the derived files           conteq.ins,
       \conteq_print_line:Nno \l_conteq_result_tl {##1} {\conteq_nl:} 
     }
     \conteq_print_line:NVn \l_conteq_result_tl \l_conteq_lastline_tl {} 
-    \tl_put_right:No \l_conteq_result_tl \conteq_end:
+    \tl_put_right:Nx \l_conteq_result_tl {\exp_not:o \conteq_end:}
   }
   % Use this for debugging
   %\tl_show:N \l_conteq_result_tl
