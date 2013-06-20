@@ -111,7 +111,7 @@ and the derived files           conteq.ins,
 %
 % \GetFileInfo{\jobname.sty}
 %
-% \CheckSum{166}
+% \CheckSum{175}
 %
 %
 %\title{^^A
@@ -328,18 +328,18 @@ and the derived files           conteq.ins,
 %
 %    \begin{macrocode}
 \msg_new:nnn
-    {conteq}
-    {empty}
+    { conteq }
+    { empty }
     { Empty~conteq~environment~\msg_line_context: }
 
 \msg_new:nnn
-    {conteq}
-    {ignoreddata}
+    { conteq }
+    { ignoreddata }
     { Ignored~text~\msg_line_context: }
 
 \msg_new:nnn
-    {conteq}
-    {undefined layout}
+    { conteq }
+    { undefined layout }
     { Undefined~layout~``#1''~\msg_line_context: }
 %    \end{macrocode}
 
@@ -363,9 +363,10 @@ and the derived files           conteq.ins,
 % \begin{macro}{\ConteqSetDefaultLayout}
 % The code to set the default layout.
 %    \begin{macrocode}
-\cs_new_protected:Nn \__conteq_set_default_layout:n {
-  \tl_set:Nn \l__conteq_default_layout_tl {#1}
-}
+\cs_new_protected:Nn \__conteq_set_default_layout:n
+  {
+    \tl_set:Nn \l__conteq_default_layout_tl {#1}
+  }
 \cs_new_eq:NN \ConteqSetDefaultLayout \__conteq_set_default_layout:n
 %    \end{macrocode}
 % \end{macro}
@@ -375,14 +376,15 @@ and the derived files           conteq.ins,
 %    \begin{macrocode}
 \tl_const:Nn \c__conteq_prefix_tl { __conteq_layouts }
 
-\cs_new_protected:Nn \__conteq_define_layout:nnnnnnn {
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1 _begin:} { #2 }
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_lhs:n} { #3 }
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_rhs_only:n} { #4 }
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_rhs_expl:nn} { #5 }
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_nl:} { #6 }
-  \cs_new_protected:cn {\c__conteq_prefix_tl _ #1_end:} { #7 }
-}
+\cs_new_protected:Nn \__conteq_define_layout:nnnnnnn
+  {
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1 _begin: } { #2 }
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1_lhs:n } { #3 }
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1_rhs_only:n } { #4 }
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1_rhs_expl:nn } { #5 }
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1_nl: } { #6 }
+    \cs_new_protected:cn { \c__conteq_prefix_tl _ #1_end: } { #7 }
+  }
 \cs_new_eq:NN \ConteqDefineLayout \__conteq_define_layout:nnnnnnn
 %    \end{macrocode}
 % \end{macro}
@@ -393,15 +395,17 @@ and the derived files           conteq.ins,
 % For ease of debugging(?) we construct a token list that contains exactly the tokens that a programmer would enter to create the layout manually. For that we need some fine-grained control over expansion.
 %
 %    \begin{macrocode}
-\cs_new:Npn \__conteq_args_once:Nn #1#2 {
-   \exp_not:o {#1 {#2}}
-}
-\cs_generate_variant:Nn \__conteq_args_once:Nn {NV}
+\cs_new:Npn \__conteq_args_once:Nn #1#2
+  {
+   \exp_not:o { #1 {#2} }
+  }
+\cs_generate_variant:Nn \__conteq_args_once:Nn { NV }
 
-\cs_new:Npn \__conteq_args_once:Nnn #1#2#3 {
-   \exp_not:o {#1 {#2}{#3}}
-}
-\cs_generate_variant:Nn \__conteq_args_once:Nnn {NVV}
+\cs_new:Npn \__conteq_args_once:Nnn #1#2#3
+  {
+   \exp_not:o { #1 { #2 }{ #3 } }
+  }
+\cs_generate_variant:Nn \__conteq_args_once:Nnn { NVV }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -410,30 +414,36 @@ and the derived files           conteq.ins,
 % \begin{macro}{\__conteq_print_line:nn}
 % This macro splits and prints one line of the table. The second argument is either |\\| or, for the last line of the table, empty.
 %    \begin{macrocode}
-\cs_new_protected:Npn \__conteq_print_line:Nnn #1#2#3 {
-  \seq_set_split:Nnn \l__conteq_cells_seq { & } {#2}
-  \seq_pop_left:NN \l__conteq_cells_seq \l__conteq_rhs_tl
-  \tl_clear:N \l__conteq_expl_tl
-  \seq_if_empty:NF \l__conteq_cells_seq {
-    \seq_pop_left:NN \l__conteq_cells_seq \l__conteq_expl_tl
+\cs_new_protected:Npn \__conteq_print_line:Nnn #1#2#3
+  {
+    \seq_set_split:Nnn \l__conteq_cells_seq { & } { #2 }
+    \seq_pop_left:NN \l__conteq_cells_seq \l__conteq_rhs_tl
+    \tl_clear:N \l__conteq_expl_tl
+    \seq_if_empty:NF \l__conteq_cells_seq
+      {
+	\seq_pop_left:NN \l__conteq_cells_seq \l__conteq_expl_tl
+      }
+    \tl_if_blank:VTF \l__conteq_expl_tl
+      {
+	\tl_put_right:Nx #1
+	  {
+	    \__conteq_args_once:NV \__conteq_rhs_only:n \l__conteq_rhs_tl
+	  }
+      }
+      {
+	\tl_set:Nx \l_tmpa_tl { \exp_not:N \text { \exp_not:N \ConteqExplStyle { \exp_not:V \l__conteq_expl_tl } } }
+	\tl_put_right:Nx #1
+	  {
+	    \__conteq_args_once:NVV \__conteq_rhs_expl:nn \l__conteq_rhs_tl \l_tmpa_tl
+          }
+      }
+      \seq_if_empty:NF \l__conteq_cells_seq
+	{
+	  \msg_warning:nn{conteq}{ignoreddata}
+	}
+    \tl_put_right:Nn #1 {#3}
   }
-  \tl_if_blank:VTF \l__conteq_expl_tl {
-    \tl_put_right:Nx #1 {
-      \__conteq_args_once:NV \__conteq_rhs_only:n \l__conteq_rhs_tl
-    }
-  }{
-    \tl_set:Nx \l_tmpa_tl {\exp_not:N \text {\exp_not:N \ConteqExplStyle {\exp_not:V \l__conteq_expl_tl}}}
-    \tl_put_right:Nx #1 {
-      \__conteq_args_once:NVV \__conteq_rhs_expl:nn \l__conteq_rhs_tl \l_tmpa_tl
-    }
-  }
-  \seq_if_empty:NF \l__conteq_cells_seq {
-    \msg_warning:nn{conteq}{ignoreddata}
-  }
-  \tl_put_right:Nn #1 {#3}
-}
-\cs_generate_variant:Nn \__conteq_print_line:Nnn {Nno}
-\cs_generate_variant:Nn \__conteq_print_line:Nnn {NVn}
+\cs_generate_variant:Nn \__conteq_print_line:Nnn { Nno, NVn }
 %    \end{macrocode}
 % \end{macro}
 
@@ -442,27 +452,30 @@ and the derived files           conteq.ins,
 %
 % The main environment of the package.
 %    \begin{macrocode}
-\NewEnviron{conteq}[1][\l__conteq_default_layout_tl]{
+\NewEnviron{ conteq }[1][ \l__conteq_default_layout_tl ]{
   \tl_set:NV \l__conteq_body_tl \BODY
   
-  \tl_if_blank:oT \l__conteq_body_tl{
+  \tl_if_blank:oT \l__conteq_body_tl
+    {
       \msg_warning:nn{conteq}{empty}
-  }
+    }
 %    \end{macrocode}
 
 % Figure out the layout to use\ldots
 %    \begin{macrocode}
-  \tl_set:Nn \l__conteq_layout_tl {#1}
+  \tl_set:Nn \l__conteq_layout_tl { #1 }
 %    \end{macrocode}
 % and set the various functions accordingly, if the layout exists.
 %    \begin{macrocode}
-  \cs_if_exist:cTF {\c__conteq_prefix_tl _ \l__conteq_layout_tl _ begin:}{
-    \clist_map_inline:nn{begin:, lhs:n,rhs_only:n, rhs_expl:nn, nl:, end:}{
-      \cs_set_eq:cc {__conteq_##1}{\c__conteq_prefix_tl _ \l__conteq_layout_tl _ ##1}
+  \cs_if_exist:cTF { \c__conteq_prefix_tl _ \l__conteq_layout_tl _ begin: }
+    {
+      \clist_map_inline:nn{ begin:, lhs:n,rhs_only:n, rhs_expl:nn, nl:, end: }
+        {
+          \cs_set_eq:cc { __conteq_ ##1 }{ \c__conteq_prefix_tl _ \l__conteq_layout_tl _ ##1 }
+        }
+    }{
+      \msg_critical:nnx{conteq}{undefined layout}{\l__conteq_layout_tl}
     }
-  }{
-    \msg_critical:nnx{conteq}{undefined layout}{\l__conteq_layout_tl}
-  }
 %    \end{macrocode}
 
 % Split the body into individual lines.
@@ -475,35 +488,39 @@ and the derived files           conteq.ins,
 % If there is only one line, simply print it.
 %    \begin{macrocode}
 
-  \int_case:nnn {\seq_count:N \l__conteq_lines_seq}
-  {
-    {1} {
-      \tl_put_right:Nx \l__conteq_result_tl {\exp_not:o \__conteq_begin:}
-      \tl_put_right:NV \l__conteq_result_tl \l__conteq_body_tl
-      \tl_put_right:Nx \l__conteq_result_tl {\exp_not:o \__conteq_end:}
+  \int_case:nnn { \seq_count:N \l__conteq_lines_seq }
+    {
+      {1}
+        {
+          \tl_put_right:Nx \l__conteq_result_tl { \exp_not:o \__conteq_begin: }
+          \tl_put_right:NV \l__conteq_result_tl \l__conteq_body_tl
+          \tl_put_right:Nx \l__conteq_result_tl { \exp_not:o \__conteq_end: }
+        }
     }
-  }{
+    {
 %    \end{macrocode}
 
 % Otherwise extract the head and the last line, and print each line using |\__conteq_print_line:nn|
 %    \begin{macrocode}
-    \seq_pop_left:NN \l__conteq_lines_seq \l__conteq_head_tl
-    \seq_pop_right:NN \l__conteq_lines_seq \l__conteq_lastline_tl
+      \seq_pop_left:NN \l__conteq_lines_seq \l__conteq_head_tl
+      \seq_pop_right:NN \l__conteq_lines_seq \l__conteq_lastline_tl
 
-    \tl_put_right:Nx \l__conteq_result_tl {\exp_not:o \__conteq_begin:}
-    \tl_put_right:Nx \l__conteq_result_tl {
-      \__conteq_args_once:NV \__conteq_lhs:n \l__conteq_head_tl
+      \tl_put_right:Nx \l__conteq_result_tl { \exp_not:o \__conteq_begin: }
+      \tl_put_right:Nx \l__conteq_result_tl
+        {
+          \__conteq_args_once:NV \__conteq_lhs:n \l__conteq_head_tl
+        }
+      \seq_map_inline:Nn \l__conteq_lines_seq
+        {
+          \__conteq_print_line:Nno \l__conteq_result_tl { ##1 } { \__conteq_nl: }
+        }
+      \__conteq_print_line:NVn \l__conteq_result_tl \l__conteq_lastline_tl {} 
+      \tl_put_right:Nx \l__conteq_result_tl { \exp_not:o \__conteq_end: }
     }
-    \seq_map_inline:Nn \l__conteq_lines_seq {
-      \__conteq_print_line:Nno \l__conteq_result_tl {##1} {\__conteq_nl:} 
-    }
-    \__conteq_print_line:NVn \l__conteq_result_tl \l__conteq_lastline_tl {} 
-    \tl_put_right:Nx \l__conteq_result_tl {\exp_not:o \__conteq_end:}
+    % Use this for debugging
+    %\tl_show:N \l__conteq_result_tl
+    \tl_use:N \l__conteq_result_tl
   }
-  % Use this for debugging
-  %\tl_show:N \l__conteq_result_tl
-  \tl_use:N \l__conteq_result_tl
-}
 %    \end{macrocode}
 %\end{environment}
 %
