@@ -488,7 +488,7 @@ and the derived files           conteq.ins,
 % If there is only one line, simply print it.
 %    \begin{macrocode}
 
-  \int_case:nnn { \seq_count:N \l__conteq_lines_seq }
+  \int_case:nnF { \seq_count:N \l__conteq_lines_seq }
     {
       {1}
         {
