@@ -47,7 +47,7 @@ See http://www.latex-project.org/lppl.txt
 \endpreamble
 \postamble
 
-Copyright (C) 2013 by Joachim Breitner <mail@joachim-breitner.de>
+Copyright (C) 2013,2015 by Joachim Breitner <mail@joachim-breitner.de>
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License (LPPL), either
@@ -90,8 +90,8 @@ and the derived files           conteq.ins,
 %<package>\RequirePackage{expl3}[2012/07/02]
 %<package>\ProvidesExplPackage
 %<package>  {conteq}              % Package name
-%<package>  {2013/05/23}          % Release date
-%<package>  {0.1}                 % Release version
+%<package>  {2015/07/17}          % Release date
+%<package>  {0.1.1}                 % Release version
 %<package>  {Various layouts for continued equalities} % Description
 %
 %<*driver>
@@ -125,6 +125,7 @@ and the derived files           conteq.ins,
 %
 %\maketitle
 %
+%\changes{0.1.1}{2015/07/17}{Stop using deprecated expl3 macros}
 %\changes{0.1}{2013/05/23}{Converted to DTX file}
 %
 %
@@ -159,18 +160,18 @@ and the derived files           conteq.ins,
 % \end{conteq}
 %
 % The expressions are typeset in math mode, while the explanation is assumed to be regular text. The curly braces around the explanations come from the default |\ConteqExplStyle|.
-
+%
 % There are other layouts available, which you select with an optional parameter to |\begin{conteq}|, e.g.
 % \begin{verbatim}
 % \begin{conteq}[explline]
 % [..]
 % \end{conteq}
 % \end{verbatim}
-
+%
 % The layouts defined by |conteq| are:
-
+%
 % \paragraph{plain} The default layout, shown above.
-
+%
 % \paragraph{explline} A layout that puts the explanations below the right-hand side of the equalty it is explaining. To be used when the explanations and righ-hand sides are long.
 % \begin{conteq}[explline]
 % e^{\pi\cdot i} \\
@@ -180,7 +181,7 @@ and the derived files           conteq.ins,
 % = \int e^{-x^2} dx & this is due to Gauss.
 % \end{conteq}
 
-
+%
 % \paragraph{headline} Like plain, but the first expression is also vertically aligned with the right-hand sides.
 % \begin{conteq}[headline]
 % e^{\pi\cdot i} \\
@@ -189,7 +190,7 @@ and the derived files           conteq.ins,
 % < \sqrt 3 \\
 % = \int e^{-x^2} dx & this is due to Gauss.
 % \end{conteq}
-
+%
 % \paragraph{onecolumn} A combination of \textbf{explline} and \textbf{headline} that puts everything in one column, for maximum space efficiency.
 % \begin{conteq}[onecolumn]
 % e^{\pi\cdot i} \\
@@ -198,7 +199,7 @@ and the derived files           conteq.ins,
 % < \sqrt 3 \\
 % = \int e^{-x^2} dx & this is due to Gauss.
 % \end{conteq}
-
+%
 % \paragraph{oneline} A layout, more for demonstrational purposes, that ignores the explanations and puts everything in one line.
 % \begin{conteq}[oneline]
 % e^{\pi\cdot i} \\
@@ -207,9 +208,9 @@ and the derived files           conteq.ins,
 % < \sqrt 3 \\
 % = \int e^{-x^2} dx & this is due to Gauss.
 % \end{conteq}
-
+%
 % \DescribeMacro{\ConteqSetDefaultLayout} You can change the default layout using |\ConteqSetDefaultLayout|\marg{layout}
-
+%
 % \section{Defining layouts}
 %
 % \DescribeMacro{\ConteqDefineLayout}
@@ -309,7 +310,7 @@ and the derived files           conteq.ins,
 %  \PrintIndex
 %}
 %
-
+%
 %
 % \section{Implementation}
 %
@@ -323,7 +324,7 @@ and the derived files           conteq.ins,
 \RequirePackage{amsmath}
 \RequirePackage{environ}
 %    \end{macrocode}
-
+%
 % \subsection{Defining Messages}
 %
 %    \begin{macrocode}
