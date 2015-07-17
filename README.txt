@@ -19,12 +19,3 @@ This package allows you to write an continued equality such as
 
 in a declarative manner and easily switch between various layouts afterwards.
 
-
-
-
-
-
-
-
-
-
